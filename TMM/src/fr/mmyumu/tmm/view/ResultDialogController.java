@@ -7,6 +7,7 @@ import fr.mmyumu.tmm.model.Expense;
 import fr.mmyumu.tmm.model.ResultComputer;
 import fr.mmyumu.tmm.util.Util;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -117,9 +118,12 @@ public class ResultDialogController {
 
 			expenses.setItems((ObservableList<Expense>) person.getExpenses());
 
+
+			ObservableList<Expense> expensesObservableList = expenses.getItems().isEmpty()
+					? FXCollections.observableArrayList(new Expense()) : expenses.getItems();
 			expenses.setFixedCellSize(25);
 			expenses.prefHeightProperty()
-					.bind(expenses.fixedCellSizeProperty().multiply(Bindings.size(expenses.getItems()).add(1.01)));
+					.bind(expenses.fixedCellSizeProperty().multiply(Bindings.size(expensesObservableList).add(1.01)));
 			expenses.minHeightProperty().bind(expenses.prefHeightProperty());
 			expenses.maxHeightProperty().bind(expenses.prefHeightProperty());
 
