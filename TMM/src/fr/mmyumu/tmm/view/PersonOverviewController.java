@@ -87,6 +87,8 @@ public class PersonOverviewController {
 							.text("Expense " + row.getItem().getLabel() + " edited.")
 							.hideAfter(Duration.seconds(3))
 							.show();
+
+							eventOverviewController.refresh();
 						}
 					}
 				});
@@ -97,6 +99,7 @@ public class PersonOverviewController {
 					@Override
 					public void handle(ActionEvent event) {
 						expenseTable.getItems().remove(row.getItem());
+						eventOverviewController.refresh();
 					}
 				});
 				contextMenu.getItems().add(removeMenuItem);

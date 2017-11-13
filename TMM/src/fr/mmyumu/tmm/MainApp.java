@@ -2,6 +2,7 @@ package fr.mmyumu.tmm;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -49,6 +50,8 @@ public class MainApp extends Application {
 	 */
 	private ObservableList<Event> eventData = FXCollections.observableArrayList();
 
+	private Properties properties;
+
 	/**
 	 * Constructor.
 	 */
@@ -74,6 +77,15 @@ public class MainApp extends Application {
 	}
 
 	/**
+	 * Gets the properties.
+	 *
+	 * @return the properties
+	 */
+	public Properties getProperties() {
+		return properties;
+	}
+
+	/**
 	 * The main method.
 	 *
 	 * @param args
@@ -93,41 +105,54 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("TMM");
 
+		loadProperties();
 		initRootLayout();
 
 		showTMMOverview();
 	}
 
 	/**
-	 * Initializes the root layout and tries to load the last opened
-	 * person file.
+	 * Load properties.
+	 */
+	private void loadProperties() {
+		properties = new Properties();
+		try {
+			properties.load(MainApp.class.getClassLoader().getResourceAsStream("application.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Initializes the root layout and tries to load the last opened person
+	 * file.
 	 */
 	public void initRootLayout() {
-	    try {
-	        // Load root layout from fxml file.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class
-	                .getResource("view/RootLayout.fxml"));
-	        rootLayout = (BorderPane) loader.load();
+		try {
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class
+					.getResource("view/RootLayout.fxml"));
+			rootLayout = (BorderPane) loader.load();
 
-	        // Show the scene containing the root layout.
-	        Scene scene = new Scene(rootLayout);
-	        primaryStage.setScene(scene);
+			// Show the scene containing the root layout.
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
 
-	        // Give the controller access to the main app.
-	        RootLayoutController controller = loader.getController();
-	        controller.setMainApp(this);
+			// Give the controller access to the main app.
+			RootLayoutController controller = loader.getController();
+			controller.setMainApp(this);
 
-	        primaryStage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-	    // Try to load last opened person file.
-	    File file = getEventFilePath();
-	    if (file != null) {
-	        loadEventDataFromFile(file);
-	    }
+		// Try to load last opened person file.
+		File file = getEventFilePath();
+		if (file != null) {
+			loadEventDataFromFile(file);
+		}
 	}
 
 	/**
@@ -222,8 +247,8 @@ public class MainApp extends Application {
 	}
 
 	/**
-	 * Loads event data from the specified file. The current event data will
-	 * be replaced.
+	 * Loads event data from the specified file. The current event data will be
+	 * replaced.
 	 *
 	 * @param file
 	 */
