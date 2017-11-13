@@ -112,7 +112,7 @@ public class RootLayoutController {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("TMM");
 		alert.setHeaderText("About");
-		alert.setContentText("Author: mmyumu");
+		alert.setContentText("Version: " + mainApp.getProperties().getProperty("version") + "\nAuthor: mmyumu");
 
 		alert.showAndWait();
 	}
