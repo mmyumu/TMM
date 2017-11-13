@@ -99,6 +99,7 @@ public class PersonOverviewController {
 					@Override
 					public void handle(ActionEvent event) {
 						expenseTable.getItems().remove(row.getItem());
+						eventOverviewController.refresh();
 					}
 				});
 				contextMenu.getItems().add(removeMenuItem);
