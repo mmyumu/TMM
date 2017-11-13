@@ -87,6 +87,8 @@ public class PersonOverviewController {
 							.text("Expense " + row.getItem().getLabel() + " edited.")
 							.hideAfter(Duration.seconds(3))
 							.show();
+
+							eventOverviewController.refresh();
 						}
 					}
 				});
