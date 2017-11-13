@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.mmyumu.tmm.view.EventOverviewController">
+   <children>
+      <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="Event name" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="dateLabel" layoutY="22.0" text="Event date" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="25.0" />
+      <ButtonBar layoutX="150.0" layoutY="446.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#compute" text="Compute" />
+            <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit" />
+          <Button mnemonicParsing="false" onAction="#handleDeleteEvent" text="Delete" />
+        </buttons>
+      </ButtonBar>
+      <SplitPane dividerPositions="0.5" layoutX="33.0" layoutY="51.0" prefHeight="410.0" prefWidth="500.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="peopleTable" layoutX="-69.0" layoutY="-6.0" prefHeight="407.0" prefWidth="145.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First name" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last name" />
+                        <TableColumn fx:id="totalColumn" prefWidth="75.0" text="Total" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button layoutX="84.0" layoutY="381.0" mnemonicParsing="false" onAction="#handleAddPerson" text="+ Add person" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <BorderPane id="personDetails" prefHeight="200.0" prefWidth="200.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
